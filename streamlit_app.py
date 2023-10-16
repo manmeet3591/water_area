@@ -1,10 +1,17 @@
-# streamlit_app.py
-
-import streamlit as st
+import os
+import json
 import ee
+import streamlit as st
 
-# Initialize Earth Engine.
-ee.Initialize()
+# Get the environment variable or default to an empty string
+service_account_key_str = os.environ.get('GEE_SERVICE_ACCOUNT_KEY', '')
+
+
+# Retrieve the service account key from Streamlit's secrets
+service_account_key = st.secrets["GEE_SERVICE_ACCOUNT_KEY"]
+# Use the service account for authentication
+credentials = ee.ServiceAccountCredentials(email=service_account_key['client_email'], key_data=service_account_key['private_key'])
+ee.Initialize(credentials)
 
 # Constants for our app
 START_DATE = '2021-04-02'
