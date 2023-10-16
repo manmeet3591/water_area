@@ -17,7 +17,7 @@ ee.Initialize(credentials)
 START_DATE = '2021-04-02'
 END_DATE = '2021-04-03'
 
-@st.cache
+
 def get_water_area(start_date, end_date, coords):
     # Define a rectangle (box) geometry using the coordinates
     box = ee.Geometry.Rectangle(coords)
