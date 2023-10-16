@@ -2,7 +2,7 @@ import os
 import json
 import ee
 import streamlit as st
-
+import datetime
 # Get the environment variable or default to an empty string
 service_account_key_str = os.environ.get('GEE_SERVICE_ACCOUNT_KEY', '')
 
