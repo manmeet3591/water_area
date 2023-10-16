@@ -45,7 +45,7 @@ def get_water_area(start_date, end_date, coords):
 
     # Convert from square meters to square kilometers
     total_water_area_km2 = total_water_area / 1e6
-    return total_water_area_km2
+    return total_water_area_km2, water_mask
 
 st.title("Dynamic World - Water Area Calculator over a Box")
 
@@ -71,7 +71,7 @@ max_lat = st.number_input("Maximum Latitude", value=53.0)
 
 # Calculate and display results
 coords = [min_lon, min_lat, max_lon, max_lat]
-water_area = get_water_area(start_date, end_date, coords)
+water_area, water_mask = get_water_area(start_date, end_date, coords)
 st.write(f"Total water area for the selected date range: {water_area:.2f} km^2")
 
 # To run the app:
