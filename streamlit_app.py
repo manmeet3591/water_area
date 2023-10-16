@@ -111,4 +111,4 @@ water_area = get_water_area(start_date, end_date, coords)
 water_mask_map = plot_water_mask_on_map(water_mask, coords)
 folium_static(water_mask_map)
 
-st.write(f"Total water area for the selected date range: {water_area:.2f} km^2")
+#st.write(f"Total water area for the selected date range: {water_area:.2f} km^2")
