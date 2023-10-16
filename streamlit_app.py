@@ -25,7 +25,7 @@ def get_water_area(start_date, end_date, coords):
     # Filter collection
     colFilter = ee.Filter.And(
         ee.Filter.bounds(box),
-        ee.Filter.date(ee.Date(start_date), ee.Date(end_date))
+        ee.Filter.date(ee.Date(str(start_date)), ee.Date(str(end_date)))
     )
 
     # Get Dynamic World collection
@@ -48,12 +48,18 @@ st.title("Dynamic World - Water Area Calculator over a Box")
 # Input widgets
 
 start_date_default = datetime.datetime.strptime(START_DATE, '%Y-%m-%d').date()
-start_date = st.date_input("Start Date", start_date_default)
+#start_date = st.date_input("Start Date", start_date_default)
 
 
 #start_date = st.date_input("Start Date", START_DATE)
 end_date_default = datetime.datetime.strptime(END_DATE, '%Y-%m-%d').date()
-end_date = st.date_input("End Date", end_date_default)
+
+
+#end_date = st.date_input("End Date", end_date_default)
+
+start_date = st.date_input("Start Date", start_date_default).strftime('%Y-%m-%d')
+end_date = st.date_input("End Date", end_date_default).strftime('%Y-%m-%d')
+
 min_lon = st.number_input("Minimum Longitude", value=20.0)
 min_lat = st.number_input("Minimum Latitude", value=52.0)
 max_lon = st.number_input("Maximum Longitude", value=21.0)
