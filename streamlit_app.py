@@ -3,6 +3,10 @@ import json
 import ee
 import streamlit as st
 import datetime
+
+import folium
+from streamlit_folium import folium_static
+
 # Get the environment variable or default to an empty string
 service_account_key_str = os.environ.get('GEE_SERVICE_ACCOUNT_KEY', '')
 
@@ -72,3 +76,39 @@ st.write(f"Total water area for the selected date range: {water_area:.2f} km^2")
 
 # To run the app:
 # streamlit run streamlit_app.py
+def plot_water_mask_on_map(mask, coords):
+    """Function to plot water mask on a map using folium."""
+    
+    center_lat = (coords[1] + coords[3]) / 2
+    center_lon = (coords[0] + coords[2]) / 2
+    
+    m = folium.Map(location=[center_lat, center_lon], zoom_start=10)
+    
+    # Create a URL for the water mask using Earth Engine's `getThumbURL` method
+    mask_url = mask.getThumbURL({
+        'bands': 'water',
+        'min': 0,
+        'max': 1,
+        'palette': ['blue'],  # Color for water
+        'region': coords
+    })
+    
+    # Add the mask as an image overlay on the folium map
+    folium.raster_layers.ImageOverlay(
+        image=mask_url,
+        bounds=[[coords[1], coords[0]], [coords[3], coords[2]]],
+        opacity=0.7
+    ).add_to(m)
+    
+    return m
+# Rest of the code ...
+
+# Calculate and display results
+coords = [min_lon, min_lat, max_lon, max_lat]
+water_area = get_water_area(start_date, end_date, coords)
+
+# Plot the water mask
+water_mask_map = plot_water_mask_on_map(water_mask, coords)
+folium_static(water_mask_map)
+
+st.write(f"Total water area for the selected date range: {water_area:.2f} km^2")
