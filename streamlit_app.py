@@ -66,8 +66,8 @@ end_date = st.date_input("End Date", end_date_default).strftime('%Y-%m-%d')
 
 min_lon = st.number_input("Minimum Longitude", value=20.0)
 min_lat = st.number_input("Minimum Latitude", value=52.0)
-max_lon = st.number_input("Maximum Longitude", value=21.0)
-max_lat = st.number_input("Maximum Latitude", value=53.0)
+max_lon = st.number_input("Maximum Longitude", value=20.5)
+max_lat = st.number_input("Maximum Latitude", value=52.5)
 
 # Calculate and display results
 coords = [min_lon, min_lat, max_lon, max_lat]
