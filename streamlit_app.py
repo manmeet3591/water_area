@@ -37,7 +37,7 @@ def get_water_area(start_date, end_date, coords):
 
     # Calculate area
     pixel_area = water_mask.multiply(ee.Image.pixelArea())
-    total_water_area = pixel_area.reduceRegion(reducer=ee.Reducer.sum(), geometry=box, scale=10).get('water').getInfo()
+    total_water_area = pixel_area.reduceRegion(reducer=ee.Reducer.sum(), geometry=box, scale=30).get('water').getInfo()
 
     # Convert from square meters to square kilometers
     total_water_area_km2 = total_water_area / 1e6
