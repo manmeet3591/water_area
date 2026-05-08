@@ -71,7 +71,7 @@ max_lat = st.number_input("Maximum Latitude", value=52.3)
 
 # Calculate and display results
 coords = [min_lon, min_lat, max_lon, max_lat]
-water_area, water_mask = get_water_area(start_date, end_date, coords)
+service_account_key = json.loads(st.secrets["GEE_SERVICE_ACCOUNT_KEY"])
 st.write(f"Total water area for the selected date range: {water_area:.2f} km^2")
 
 # To run the app:
